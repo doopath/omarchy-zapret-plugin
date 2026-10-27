@@ -1,0 +1,1 @@
+doopath ALL=(root) NOPASSWD: /usr/local/bin/zapret-ctl start, /usr/local/bin/zapret-ctl stop, /usr/local/bin/zapret-ctl restart, /usr/local/bin/zapret-ctl logs, /usr/local/bin/zapret-ctl blockcheck

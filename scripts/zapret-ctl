@@ -1,0 +1,44 @@
+#!/bin/bash
+# Root helper for doopath.zapret. Only the verbs below are accepted; nothing
+# from the caller is passed on to a shell. Installed to /usr/local/bin/zapret-ctl
+# and whitelisted in /etc/sudoers.d/zapret-ctl.
+
+set -euo pipefail
+
+# Fixed PATH: sudo resets the environment, but this helper is also useful when
+# invoked by hand.
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export LC_ALL=C
+
+usage() {
+  echo "usage: zapret-ctl {status|start|stop|restart|logs|blockcheck}" >&2
+  exit 64
+}
+
+[[ $# -eq 1 ]] || usage
+
+case "$1" in
+  status)
+    # Readable without root; exit code mirrors `systemctl is-active`.
+    systemctl is-active zapret2
+    ;;
+  start)
+    systemctl start zapret2
+    ;;
+  stop)
+    systemctl stop zapret2
+    ;;
+  restart)
+    systemctl restart zapret2
+    ;;
+  logs)
+    # The only way to read the unit journal: the user is not in systemd-journal.
+    exec journalctl -u zapret2 -f -n 200
+    ;;
+  blockcheck)
+    exec /opt/zapret2/blockcheck2.sh
+    ;;
+  *)
+    usage
+    ;;
+esac
