@@ -1,0 +1,10 @@
+# Local build/test artifacts
+.build-*/
+.debug-*
+.launch.log
+.exec-probe
+.screen*.png
+.bar*.png
+.hover*.png
+.logs*.png
+.popup-crop*.png
