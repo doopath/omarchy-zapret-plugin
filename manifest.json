@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "doopath.zapret",
+  "name": "Zapret",
+  "version": "0.1.0",
+  "author": "doopath",
+  "description": "Start, stop, and inspect the zapret2 DPI-bypass service from the bar",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Zapret",
+    "description": "Status and controls for the zapret2 service",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
